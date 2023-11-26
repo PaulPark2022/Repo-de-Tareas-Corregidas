@@ -76,6 +76,7 @@ Node<T>* Node<T>::find(T val) {
     } else {
         return this;
     }
+    return 0;
 }
 
 template <class T>
@@ -84,6 +85,10 @@ Node<T>* Node<T>::succesor() {
 
 	le = left;
 	ri = right;
+
+	if (right == 0) {
+        	return 0; 
+    	}
 
 	if (right->left == 0) {
 		right = right->right;
@@ -137,8 +142,9 @@ Node<T>* Node<T>::remove(T val) {
 			} else {
 				left = 0;
 			}
+			Node<T>* oldParent = old->parent;
 			delete old;
-                	return old->parent; 
+                	return oldParent; 
             	} else {
 		    return left->remove(val);
             	}
@@ -173,8 +179,9 @@ Node<T>* Node<T>::remove(T val) {
                 	} else {
                     		right = 0;
                		}
+			Node<T>* oldParent = old->parent;
 			delete old;
-                	return old->parent; 
+                  	return oldParent; 
             } else {
 		return right->remove(val);
             }
