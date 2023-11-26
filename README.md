@@ -46,19 +46,24 @@
    d) En la función remove de la clase Node, se eliminaron la variable apuntadora root (línea 108) y las siguientes líneas:
 
    Líneas 109-110:
+   
            root = this;
            std::cout << root->value;
 
    Líneas 136, 172:
+   
            old->right = 0;
 
    Líneas 140, 176:
+   
            old->left = 0;
 
    Línea 143:
+   
            return splay(root, left);
 
    Línea 179:
+   
            return splay(root, right);
 
    e) En la misma función remove, se reescribieron las siguientes líneas:
@@ -70,6 +75,7 @@
            }
        
    Línea 149:
+   
         return left->remove(val);
 
    Líneas 179-181:
@@ -79,6 +85,7 @@
            }
 
    Línea 186:
+   
         return right->remove(val);
 
    Líneas 145-147, 182-184:
@@ -88,4 +95,5 @@
         return oldParent;
 
    Línea 190:
+   
         return 0;
