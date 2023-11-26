@@ -122,22 +122,27 @@ Node<T>* Node<T>::remove(T val) {
 					    if (succ->right)
 					        succ->right->parent = succ;
 				    }
+				    if (old->parent && old->parent->left == old) {
+                        		old->parent->left = succ;
+                    		    } else if (old->parent && old->parent->right == old) {
+                       			old->parent->right = succ;
+                    		    }
 				    left = succ;
-				} else if (old->right != 0) { // solo hijo der
-				    old->right->parent = left->parent;
-				    left = old->right;
-				} else if (old->left != 0) {
-				    old->left->parent = left->parent;
-				    left = old->left;
-				} else {
-				    left = 0;
-				}
-				delete old;
-                return old->parent; 
-            } else {
-                return left->remove(val);
+			} else if (old->right != 0) { // solo hijo der
+				old->right->parent = left->parent;
+				left = old->right;
+			} else if (old->left != 0) {
+				old->left->parent = left->parent;
+				left = old->left;
+			} else {
+				left = 0;
+			}
+			delete old;
+                	return old->parent; 
+            	} else {
+		    return left->remove(val);
+            	}
             }
-        }
 	} else if (val > value) {
 		if (right != 0) {
 			if (right->value == val) {
@@ -154,24 +159,24 @@ Node<T>* Node<T>::remove(T val) {
 					        succ->right->parent = succ;
 			    	}
 			    	if (old->parent && old->parent->left == old) {
-                        old->parent->left = succ;
-                     } else if (old->parent && old->parent->right == old) {
-                       old->parent->right = succ;
-                    }
-				    right = succ;
-				} else if (old->right != 0) {
-                    old->right->parent = right->parent; 
-                    right = old->right; 
-                } else if (old->left != 0) {
-                    old->left->parent = right->parent; 
-                    right = old->left; 
-                } else {
-                    right = 0;
-                }
-				delete old;
-                return old->parent; 
+                        		old->parent->left = succ;
+                     		} else if (old->parent && old->parent->right == old) {
+                      			old->parent->right = succ;
+                    		}
+				right = succ;
+			} else if (old->right != 0) {
+                    		old->right->parent = right->parent; 
+                    		right = old->right; 
+                	} else if (old->left != 0) {
+                    		old->left->parent = right->parent; 
+                    		right = old->left; 
+                	} else {
+                    		right = 0;
+               		}
+			delete old;
+                	return old->parent; 
             } else {
-                return right->remove(val);
+		return right->remove(val);
             }
         }
     }
